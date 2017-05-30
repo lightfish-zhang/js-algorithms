@@ -8,3 +8,5 @@ class ValuePair{
         return `[${this.key}-${this.value}]`;
     }
 }
+
+module.exports = ValuePair

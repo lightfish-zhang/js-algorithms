@@ -16,7 +16,7 @@ class HashTable{
         for(let i =0; i< key.length; i++){
             hash += key.charCodeAt(i)
         }
-        return hash % 31;
+        return hash % 37;
     }
 
 
@@ -31,6 +31,7 @@ class HashTable{
 
     get(key){
         let linkedList = this.table[this.loseloseHashCode(key)];
+        console.log('HashCode', key, ' ', this.loseloseHashCode(key))
         if(linkedList != undefined){
             let current = linkedList.getHead();
             while(current){

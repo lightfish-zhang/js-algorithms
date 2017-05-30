@@ -14,12 +14,12 @@ class LinkedList{
     
     append(element){
         const node = new Node(element);
-        const current;
+        let current;
 
         if(this.head === null){
             this.head = node;
         }else{
-            current = head;
+            current = this.head;
             while(current.next){
                 current = current.next;
             }
@@ -97,3 +97,5 @@ class LinkedList{
     }
 
 }
+
+module.exports = LinkedList
