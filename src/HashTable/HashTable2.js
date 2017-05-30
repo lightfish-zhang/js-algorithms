@@ -50,6 +50,7 @@ class HashTable{
             let current = table[position].getHead();
             while(current){
                 if(current.element.key === key){
+                    // todo:: fix bug, LinkedList's remove() has bug
                     this.table[position].remove(current.element);
                     if(this.table[position].isEmpty()){
                         this.table[position] = undefined;
