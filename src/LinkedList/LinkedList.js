@@ -2,12 +2,15 @@ class Node{
     constructor(element){
         this.element = element;
         this.next = null;
-        this.head = null;
-        this.length = null;
     }
 }
 
 class LinkedList{
+
+    constructor(){
+        this.head = null;
+        this.length = null;
+    }
     
     append(element){
         const node = new Node(element);
@@ -68,6 +71,29 @@ class LinkedList{
         }
     }
 
+    getHead(){
+        return this.head;
+    }
 
+    isEmpty(){
+        return this.length === 0;
+    }
+
+    indexOf(element){
+        let current = head, index = -1;
+        while(current){
+            if(element === current.element){
+                return index;
+            }
+            index ++;
+            current = current.next;
+        }
+        return -1;
+    }
+
+    remove(element){
+        let index = this.indexOf(element)
+        return this.removeAt(index)
+    }
 
 }
