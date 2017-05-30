@@ -31,7 +31,6 @@ class HashTable{
 
     get(key){
         let linkedList = this.table[this.loseloseHashCode(key)];
-        console.log('HashCode', key, ' ', this.loseloseHashCode(key))
         if(linkedList != undefined){
             let current = linkedList.getHead();
             while(current){
@@ -47,16 +46,19 @@ class HashTable{
     remove(key){
         let position = this.loseloseHashCode(key);
         if(this.table[position]){
-            let current = table[position].getHead();
+            let current = this.table[position].getHead();
+            let index = 0;
             while(current){
                 if(current.element.key === key){
-                    // todo:: fix bug, LinkedList's remove() has bug
-                    this.table[position].remove(current.element);
+                    // todo:: test bug
+                    this.table[position].removeAt(index);
                     if(this.table[position].isEmpty()){
                         this.table[position] = undefined;
                     }
                     return true;
                 }
+                current = current.next;
+                index++;
             }
         }
         return false;

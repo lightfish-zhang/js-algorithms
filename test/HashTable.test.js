@@ -19,6 +19,7 @@ it("HashTable's set(), get()", ()=>{
     let values = [];
     for(let k in testObj){
         hashTable.put(k, testObj[k])
+        console.log('HashCode', k, ' ', hashTable.loseloseHashCode(k))
         values.push(testObj[k])
     }
 
@@ -28,6 +29,12 @@ it("HashTable's set(), get()", ()=>{
         assert.equal(hashGet, testObj[k])
     }
 
-    // assert.deepEqual(dict.values(), values)
+
+    let AaronV = hashTable.get('Aaron');
+    assert.equal(AaronV, 'Aaron-value');
+    hashTable.remove('Aaron');
+    AaronV = hashTable.get('Aaron');
+    assert.equal(AaronV, undefined);
+
 
 })

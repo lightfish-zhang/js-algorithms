@@ -32,14 +32,19 @@ class LinkedList{
     removeAt(position){
         if(position > -1 && position < this.length){
             let current = this.head, previous, index = 0;
-            if(position = 0){
+            if(position === 0){
                 this.head = current.next;
             }else{
-                while( index ++ < position){
+                while( index < position){
                     previous = current;
                     current = current.next;
+                    index ++;
                 }
-                previous.next = current.next;
+                if(current){
+                    previous.next = current.next;
+                }else{
+                    previous.next = undefined;
+                }
             }
             this.length --;
             return current.element
