@@ -11,7 +11,7 @@ class LinkedList{
         this.head = null;
         this.length = null;
     }
-    
+
     append(element){
         const node = new Node(element);
         let current;
@@ -85,7 +85,7 @@ class LinkedList{
     }
 
     indexOf(element){
-        let current = head, index = -1;
+        let current = this.head, index = 0;
         while(current){
             if(element === current.element){
                 return index;
