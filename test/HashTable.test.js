@@ -43,21 +43,10 @@ it("HashTable's performance test, compare with Map", (done)=>{
     const testObj = {};
     let startMillisecond,internalMillisecond;
 
-    console.log('start shuffle key');
-    let shufflePool = 'asdsdreffsdawrgwerlrtrahryoysteradfsdfadasawewgkehrwegagoeraibdfhrdsathjeawvzgfbegroxcwinv'; // 用脸滚键盘 :)
     for(let i = 0; i < 10000; i++){
-        let randomNumber = Math.ceil(Math.random() * 1000);
-        shufflePool += shufflePool.slice(randomNumber, randomNumber*10);
+      testObj[Math.ceil(Math.random() * 100000)] = Math.ceil(Math.random() * 10000);
     }
-
-    for(let i = 0; i < 100; i++){
-        let randomNumber = Math.ceil(Math.random() * 1000);
-        let key = shufflePool.slice(randomNumber, randomNumber*10);
-        randomNumber = Math.ceil(Math.random() * 1000);
-        let value = shufflePool.slice(randomNumber, randomNumber*10);
-        testObj[key] = value;
-    }
-    console.log('end shuffle key');
+    console.log('testObj length: ', Object.values(testObj).length);
 
     const hashTable = new HashTable();
     startMillisecond = (new Date()).valueOf();
