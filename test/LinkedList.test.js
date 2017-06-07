@@ -4,7 +4,7 @@ const assert = require('assert');
 const LinkedList = require('../src/LinkedList/LinkedList');
 
 
-it("LinkedList's append(), indexOf()", ()=>{
+it("LinkedList's append(), indexOf(), remove()", ()=>{
     const list = new LinkedList();
 
     const testArray = [];
