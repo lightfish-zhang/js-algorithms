@@ -5,7 +5,7 @@ class Dictionary{
     }
 
     has(key){
-        return this.items[key];
+        return this.items[key] !== undefined;
     }
 
     set(key, value){

@@ -49,9 +49,9 @@ class BinarySearchTree {
 
   inOrderTraverseNode(node, callback){
     if(null !== node){
-      inOrderTraverseNode(node.left, callback);
+      this.inOrderTraverseNode(node.left, callback);
       callback(node);
-      inOrderTraverseNode(node.right, callback);
+      this.inOrderTraverseNode(node.right, callback);
     }
   }
 
@@ -62,8 +62,8 @@ class BinarySearchTree {
   preOrderTraverseNode(node, callback){
     if(null !== node){
       callback(node);
-      this.preOrderTraverseNode(node.left);
-      this.preOrderTraverseNode(node.right);
+      this.preOrderTraverseNode(node.left, callback);
+      this.preOrderTraverseNode(node.right, callback);
     }
   }
 
@@ -85,7 +85,7 @@ class BinarySearchTree {
 
   searchNode(node, key){
     if(null === node){
-      return false;
+      return undefined;
     }
     if(key < node.key){
       return this.searchNode(node.left, key);
@@ -134,8 +134,33 @@ class BinarySearchTree {
     }
     if(key < node.key){
       node.left = this.removeNode(node.left, key);
+      return node;
     }else if(key > node.key){
       node.right = this.removeNode(node.right, key);
+      return node;
+    }else{
+
+      // 1, it's a node without child
+      if(null === node.left && null === node.right){
+        node = null; // garbage collection work automitic
+        return null;
+      }
+
+      // 2, it's a node with one child
+      if(null === node.left){
+        node = node.right;
+        return node;
+      }else if(null === node.right){
+        node = node.left;
+        return node;
+      }
+
+      // 3, it's a node with two children
+      const rightMinNode = this.minNode(node.right);
+      node.key = rightMinNode.key;
+      node.data = rightMinNode.data;
+      node.right = this.removeNode(node.right, rightMinNode);
+      return node;
     }
   }
 

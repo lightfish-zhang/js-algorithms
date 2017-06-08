@@ -20,7 +20,7 @@ class HashTable{
     */
     loseloseHashCode(key){
         if(typeof key !== 'string'){
-            return false;
+            key = String(key)
         }
 
         let hash = 0;
@@ -34,6 +34,10 @@ class HashTable{
         最被社区推荐的散列函数之一
     */
     djb2HashCode(key){
+        if(typeof key !== 'string'){
+            key = String(key)
+        }
+        
         const hash = 5381;
         for(let i = 0; i < key.length; i++){
             hash = hash * 33 + key.charCodeAt(i)
