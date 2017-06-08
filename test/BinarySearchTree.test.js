@@ -13,6 +13,7 @@ for(let i = 0; i < 100 ; i++){
   })
 }
 
+// if use string as key, BinarySearchTree can't work
 
 
 it("BinarySearchTree's insert(), search()", (done)=>{
