@@ -46,7 +46,7 @@ it("HashTable's performance test, compare with Map", (done)=>{
     for(let i = 0; i < 10000; i++){
       testObj[Math.ceil(Math.random() * 100000)] = Math.ceil(Math.random() * 10000);
     }
-    console.log('testObj length: ', Object.values(testObj).length);
+    console.log('testObj length: ', Object.keys(testObj).length);
 
     const hashTable = new HashTable();
     startMillisecond = (new Date()).valueOf();
