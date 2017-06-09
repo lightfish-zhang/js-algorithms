@@ -20,14 +20,9 @@ const c = ['a', 'b', 'c'];
 a.forEach((element)=>{
     element.forEach((element2)=>{
         c.forEach((_c)=>{
-            if(typeof element2.key === 'string' && element2.key.indexOf(_c) !== -1){
-                if(!(b[_c] instanceof Array)){
-                    b[_c] = [];
-                }
-                b[_c].push(element2);
-            }
+            if(typeof element2.key === 'string' && element2.key.indexOf(_c) !== -1)
+                b[_c] instanceof Array ? b[_c].push(element2) : (b[_c] = [])
         })
-        
     })
 })
 
