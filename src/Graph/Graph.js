@@ -39,7 +39,7 @@ class Graph{
     initializeColor(){
         const {vertices} = this;
         const color = new Map();
-        vertices.forEach(ele => color.set(ele, 'while'));
+        vertices.forEach(ele => color.set(ele, 'white'));
         return color;
     }
 
@@ -52,7 +52,7 @@ class Graph{
             const node = queue.shift();
             color.set(node, 'grey');
             adjList.get(node).forEach(ele=>{
-                if(color.get(ele) === 'while'){
+                if(color.get(ele) === 'white'){
                     color.set(ele, 'grey');
                     queue.push(ele);
                 }
@@ -79,7 +79,7 @@ class Graph{
             const node = queue.shift();
             color.set(node, 'grey');
             adjList.get(node).forEach(ele=>{
-                if(color.get(ele) === 'while'){
+                if(color.get(ele) === 'white'){
                     queue.push(ele);
                     color.set(ele, 'grey');
                     distances.set(ele, distances.get(node) + 1);
@@ -102,6 +102,27 @@ class Graph{
             path.unshift(v);
         path.unshift(a);
         return path;
+    }
+
+    depthFirstSearch(callback){
+        const {vertices} = this;
+        const color = this.initializeColor();
+        vertices.forEach(ele=>{
+            if(color.get(ele) === 'white')
+                this.depthFirstSearchVisit(ele, color, callback)
+        })
+    }
+
+    depthFirstSearchVisit(node, color, callback){
+        const {adjList} = this;
+        color.set(node, 'grey');
+        if(callback)
+            callback(node);
+        adjList.get(node).forEach(ele=>{
+            if(color.get(ele) === 'white')
+                this.depthFirstSearchVisit(ele, color, callback);
+        })
+        color.set(node, 'black');
     }
 
 

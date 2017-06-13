@@ -2,7 +2,7 @@ const assert = require('assert');
 
 const Graph = require('../src/Graph/Graph');
 
-it("Graph's addVertex(), addEdge(), toString(), breadthFirstSearch(), shortestPath()", (done)=>{
+it("Graph's addVertex(), addEdge(), toString(), breadthFirstSearch(), shortestPath(), depthFirstSearch()", (done)=>{
 
     const graph = new Graph();
     graph.addVertex('a');
@@ -20,10 +20,13 @@ it("Graph's addVertex(), addEdge(), toString(), breadthFirstSearch(), shortestPa
 
     console.log(graph.toString());
 
-    graph.breadthFirstSearch('b', (v)=>{ console.log(`Visited vertex: ${v}`) })
+    graph.breadthFirstSearch('b', v => { console.log(`Visited vertex: ${v}`) })
 
     console.log(graph.breadthFirstSearch2('b'));
     console.log(graph.shortestPath('b', 'e'));
+
+    console.log('depthFirstSearch: ');
+    graph.depthFirstSearch(v => { console.log(`Visited vertex: ${v}`) })
 
     done();
 })
