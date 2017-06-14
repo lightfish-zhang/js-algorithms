@@ -2,6 +2,7 @@ class Graph{
     constructor(){
         this.vertices = [];
         this.adjList = new Map();
+        this.time = 0;
     }
 
     addVertex(v){
@@ -125,7 +126,41 @@ class Graph{
         color.set(node, 'black');
     }
 
+    depthFirstSearch2(){
+        const {vertices} = this; //get Object reference
+        const color = this.initializeColor();
+        const discoverTime = new Map(), finishTime = new Map(), predecessors = new Map();
+        this.time = 0; // it is Primitive values
+        vertices.forEach(ele=>{
+            discoverTime.set(ele, 0);
+            finishTime.set(ele, 0);
+            predecessors.set(ele, null);
+        });
+        vertices.forEach(ele=>{
+            if(color.get(ele) === 'white'){
+                this.depthFirstSearchVisit2(ele, color, discoverTime, finishTime, predecessors);
+            }
+        })
+        return {
+            discoverTime,
+            finishTime,
+            predecessors
+        }
+    }
 
+    depthFirstSearchVisit2(node, color, discoverTime, finishTime, predecessors){
+        const {adjList} = this;
+        color.set(node, 'grey');
+        discoverTime.set(node, ++this.time);
+        adjList.get(node).forEach(ele=>{
+            if(color.get(ele) === 'white'){
+                predecessors.set(ele, node);
+                this.depthFirstSearchVisit2(ele, color, discoverTime, finishTime, predecessors);
+            }
+        })
+        color.set(node, 'black');
+        finishTime.set(node, ++this.time);
+    }
 
 }
 

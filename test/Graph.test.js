@@ -28,5 +28,7 @@ it("Graph's addVertex(), addEdge(), toString(), breadthFirstSearch(), shortestPa
     console.log('depthFirstSearch: ');
     graph.depthFirstSearch(v => { console.log(`Visited vertex: ${v}`) })
 
+    console.log(graph.depthFirstSearch2())
+
     done();
 })
