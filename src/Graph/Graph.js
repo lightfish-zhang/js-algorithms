@@ -1,35 +1,35 @@
 class Graph{
     constructor(){
         this.vertices = [];
-        this.adjList = new Map();
+        this.adjacentList = new Map();
         this.time = 0;
     }
 
     addVertex(v){
-        const {vertices, adjList} = this;
+        const {vertices, adjacentList} = this;
         vertices.push(v);
-        adjList.set(v, []);
+        adjacentList.set(v, []);
     }
 
     addEdge(v, w){
-        const {adjList} = this;
+        const {adjacentList} = this;
         // const add = (a, b)=>{
-        //     const vertex = adjList.get(a);
+        //     const vertex = adjacentList.get(a);
         //     if(vertex.indexOf(b) < 0)
         //         vertex.push(b);
         // }
         // add(v, w);
         // add(w, w);
-        adjList.get(v).push(w);
-        adjList.get(w).push(v);
+        adjacentList.get(v).push(w);
+        adjacentList.get(w).push(v);
     }
 
     toString(){
-        const {vertices, adjList} = this;
+        const {vertices, adjacentList} = this;
         let s = '';
         vertices.forEach(ele=>{
             s += ele + ' -> ';
-            adjList.get(ele).forEach(ele2=>{
+            adjacentList.get(ele).forEach(ele2=>{
                 s += ele2 + ' ';
             })
             s += '\n';
@@ -45,14 +45,14 @@ class Graph{
     }
 
     breadthFirstSearch(v, callback){
-        const {vertices, adjList} = this;
+        const {vertices, adjacentList} = this;
         const color = this.initializeColor();
         const queue = [];
         queue.push(v);
         while(queue.length){
             const vertex = queue.shift();
             color.set(vertex, 'grey');
-            adjList.get(vertex).forEach(ele=>{
+            adjacentList.get(vertex).forEach(ele=>{
                 if(color.get(ele) === 'white'){
                     color.set(ele, 'grey');
                     queue.push(ele);
@@ -65,7 +65,7 @@ class Graph{
     }
 
     breadthFirstSearch2(v){
-        const {vertices, adjList} = this;
+        const {vertices, adjacentList} = this;
         const color = this.initializeColor();
         const queue = [];
         const distances = new Map();
@@ -79,7 +79,7 @@ class Graph{
         while(queue.length){
             const vertex = queue.shift();
             color.set(vertex, 'grey');
-            adjList.get(vertex).forEach(ele=>{
+            adjacentList.get(vertex).forEach(ele=>{
                 if(color.get(ele) === 'white'){
                     queue.push(ele);
                     color.set(ele, 'grey');
@@ -96,7 +96,7 @@ class Graph{
     }
 
     shortestPath(a, b){
-        const {vertices, adjList} = this;
+        const {vertices, adjacentList} = this;
         const result = this.breadthFirstSearch2(a);
         let path = [];
         for(let v = b; v!==a; v = result.predecessors.get(v))
@@ -115,11 +115,11 @@ class Graph{
     }
 
     depthFirstSearchVisit(vertex, color, callback){
-        const {adjList} = this;
+        const {adjacentList} = this;
         color.set(vertex, 'grey');
         if(callback)
             callback(vertex);
-        adjList.get(vertex).forEach(ele=>{
+        adjacentList.get(vertex).forEach(ele=>{
             if(color.get(ele) === 'white')
                 this.depthFirstSearchVisit(ele, color, callback);
         })
@@ -149,10 +149,10 @@ class Graph{
     }
 
     depthFirstSearchVisit2(vertex, color, discoverTime, finishTime, predecessors){
-        const {adjList} = this;
+        const {adjacentList} = this;
         color.set(vertex, 'grey');
         discoverTime.set(vertex, ++this.time);
-        adjList.get(vertex).forEach(ele=>{
+        adjacentList.get(vertex).forEach(ele=>{
             if(color.get(ele) === 'white'){
                 predecessors.set(ele, vertex);
                 this.depthFirstSearchVisit2(ele, color, discoverTime, finishTime, predecessors);
